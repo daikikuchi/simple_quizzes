@@ -5,6 +5,7 @@ from question import views
 
 router = DefaultRouter()
 router.register('categories', views.CategoryViewSet)
+router.register('questions', views.QuestionViewSet)
 
 app_name = 'question'
 

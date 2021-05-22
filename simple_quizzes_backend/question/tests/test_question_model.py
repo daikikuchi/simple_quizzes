@@ -17,3 +17,18 @@ class ModelTests(TestCase):
             user=sample_user(),
         )
         self.assertEqual(str(category), category.name)
+
+    def test_question_str(self):
+        """Test the question string representation"""
+        user = sample_user()
+        category = models.Category.objects.create(
+            user=user
+        )
+        question = models.Question.objects.create(
+            category=category,
+            user=user,
+            content='1+1',
+            answer='2',
+        )
+        self.assertEqual(str(question),
+                         f'{question.category} - {question.content}')
