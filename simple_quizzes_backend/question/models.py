@@ -18,3 +18,23 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Question(models.Model):
+    """Model for question"""
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    content = models.TextField()
+    answer = models.TextField()
+    category = models.ForeignKey(
+        Category,
+        related_name='category_questions',
+        on_delete=models.CASCADE,
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.category} - {self.content}'
