@@ -15,6 +15,14 @@ class Category(models.Model):
         settings.AUTH_USER_MODEL,
         models.CASCADE,
     )
+    # Prevent users from making same category
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["name", "user"],
+                name="unique_category"
+            ),
+        ]
 
     def __str__(self):
         return self.name
