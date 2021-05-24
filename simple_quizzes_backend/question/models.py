@@ -15,6 +15,7 @@ class Category(models.Model):
         settings.AUTH_USER_MODEL,
         models.CASCADE,
     )
+
     # Prevent users from making same category
     class Meta:
         constraints = [

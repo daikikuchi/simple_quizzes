@@ -13,9 +13,15 @@ class CategorySerializer(serializers.ModelSerializer):
         read_only_fields = ('id', 'name')
 
 
+class CategoryPKField(serializers.PrimaryKeyRelatedField):
+    def get_queryset(self):
+        user = self.context['request'].user
+        queryset = Category.objects.filter(user=user)
+        return queryset
+
+
 class QuestionSerializer(serializers.ModelSerializer):
-    category = serializers.PrimaryKeyRelatedField(
-               queryset=Category.objects.all())
+    category = CategoryPKField()
 
     class Meta:
         model = Question
